@@ -57,7 +57,7 @@ index d7579e9..d7df434 100644
 +            o_args_avx512[-1] += ".avx512"
 +            ld_args_avx512 = ([obj + ".avx512" for obj in ld_args] + lib_opts \
 +                            + o_args_avx512)
-             ld_args = ld_args + lib_opts + o_args + ['-lgfortran']
+             ld_args = ld_args + lib_opts + o_args
 +
              if debug:
                  ld_args[:0] = ['-g']
