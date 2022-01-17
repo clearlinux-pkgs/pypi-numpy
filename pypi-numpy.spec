@@ -36,6 +36,7 @@ Patch6: 0001-add-numpy-benchmarks-for-pgo.patch
 Patch7: 0001-make-distutils-support-PGO-options.patch
 Patch8: build.patch
 
+Provides: numpy
 %description
 Notes for the numpy/tools/swig directory
 ========================================
