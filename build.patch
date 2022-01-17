@@ -1,0 +1,16 @@
+yes we've read the online discussion, but going backwards isn't great either
+
+
+--- numpy-1.22.1/setup.py~	2022-01-13 14:18:42.000000000 +0000
++++ numpy-1.22.1/setup.py	2022-01-17 18:00:24.994087585 +0000
+@@ -80,10 +80,6 @@
+ # so that it is in sys.modules
+ import numpy.distutils.command.sdist
+ import setuptools
+-if int(setuptools.__version__.split('.')[0]) >= 60:
+-    raise RuntimeError(
+-        "Setuptools version is '{}', version < '60.0.0' is required. "
+-        "See pyproject.toml".format(setuptools.__version__))
+ 
+ # Initialize cmdclass from versioneer
+ from numpy.distutils.core import numpy_cmdclass
