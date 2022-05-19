@@ -4,12 +4,12 @@
 #
 Name     : pypi-numpy
 Version  : 1.22.1
-Release  : 218
+Release  : 219
 URL      : https://files.pythonhosted.org/packages/0a/c8/a62767a6b374a0dfb02d2a0456e5f56a372cdd1689dbc6ffb6bf1ddedbc0/numpy-1.22.1.zip
 Source0  : https://files.pythonhosted.org/packages/0a/c8/a62767a6b374a0dfb02d2a0456e5f56a372cdd1689dbc6ffb6bf1ddedbc0/numpy-1.22.1.zip
 Summary  : NumPy is the fundamental package for array computing with Python.
 Group    : Development/Tools
-License  : Apache-2.0 BSD-3-Clause MIT NCSA Zlib
+License  : Apache-2.0 BSD-2-Clause BSD-3-Clause MIT NCSA Python-2.0 Zlib
 Requires: pypi-numpy-bin = %{version}-%{release}
 Requires: pypi-numpy-license = %{version}-%{release}
 Requires: pypi-numpy-python = %{version}-%{release}
@@ -27,16 +27,12 @@ BuildRequires : pypi(setuptools)
 BuildRequires : pypi(wheel)
 BuildRequires : pypi-cython
 BuildRequires : python3-dev
-Patch1: avx2-distutils.patch
-Patch2: avx2-fortran-distutils.patch
-Patch3: timestamp.patch
-Patch4: cve-2017-12852.nopatch
-Patch5: 0001-AVX-Support-for-static-lib.patch
-Patch6: 0001-add-numpy-benchmarks-for-pgo.patch
-Patch7: 0001-make-distutils-support-PGO-options.patch
-Patch8: build.patch
+Patch1: timestamp.patch
+Patch2: cve-2017-12852.nopatch
+Patch3: 0001-add-numpy-benchmarks-for-pgo.patch
+Patch4: 0001-make-distutils-support-PGO-options.patch
+Patch5: build.patch
 
-Provides: numpy
 %description
 Notes for the numpy/tools/swig directory
 ========================================
@@ -92,27 +88,24 @@ python3 components for the pypi-numpy package.
 %setup -q -n numpy-1.22.1
 cd %{_builddir}/numpy-1.22.1
 %patch1 -p1
-%patch2 -p1
 %patch3 -p1
+%patch4 -p1
 %patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1642444768
+export SOURCE_DATE_EPOCH=1652988330
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
-export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
-export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
-export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
+export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
+export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
+export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
+export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
 export MAKEFLAGS=%{?_smp_mflags}
 pypi-dep-fix.py . setuptools
 python3 -m build --wheel --skip-dependency-check --no-isolation
