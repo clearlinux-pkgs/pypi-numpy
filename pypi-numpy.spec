@@ -4,13 +4,15 @@
 #
 Name     : pypi-numpy
 Version  : 1.22.3
-Release  : 221
+Release  : 222
 URL      : https://files.pythonhosted.org/packages/64/4a/b008d1f8a7b9f5206ecf70a53f84e654707e7616a771d84c05151a4713e9/numpy-1.22.3.zip
 Source0  : https://files.pythonhosted.org/packages/64/4a/b008d1f8a7b9f5206ecf70a53f84e654707e7616a771d84c05151a4713e9/numpy-1.22.3.zip
 Summary  : NumPy is the fundamental package for array computing with Python.
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause MIT NCSA Python-2.0 Zlib
 Requires: pypi-numpy-bin = %{version}-%{release}
+Requires: pypi-numpy-filemap = %{version}-%{release}
+Requires: pypi-numpy-lib = %{version}-%{release}
 Requires: pypi-numpy-license = %{version}-%{release}
 Requires: pypi-numpy-python = %{version}-%{release}
 Requires: pypi-numpy-python3 = %{version}-%{release}
@@ -40,6 +42,7 @@ Notes for the numpy/tools/swig directory
 Summary: bin components for the pypi-numpy package.
 Group: Binaries
 Requires: pypi-numpy-license = %{version}-%{release}
+Requires: pypi-numpy-filemap = %{version}-%{release}
 
 %description bin
 bin components for the pypi-numpy package.
@@ -48,12 +51,31 @@ bin components for the pypi-numpy package.
 %package dev
 Summary: dev components for the pypi-numpy package.
 Group: Development
+Requires: pypi-numpy-lib = %{version}-%{release}
 Requires: pypi-numpy-bin = %{version}-%{release}
 Provides: pypi-numpy-devel = %{version}-%{release}
 Requires: pypi-numpy = %{version}-%{release}
 
 %description dev
 dev components for the pypi-numpy package.
+
+
+%package filemap
+Summary: filemap components for the pypi-numpy package.
+Group: Default
+
+%description filemap
+filemap components for the pypi-numpy package.
+
+
+%package lib
+Summary: lib components for the pypi-numpy package.
+Group: Libraries
+Requires: pypi-numpy-license = %{version}-%{release}
+Requires: pypi-numpy-filemap = %{version}-%{release}
+
+%description lib
+lib components for the pypi-numpy package.
 
 
 %package license
@@ -76,6 +98,7 @@ python components for the pypi-numpy package.
 %package python3
 Summary: python3 components for the pypi-numpy package.
 Group: Default
+Requires: pypi-numpy-filemap = %{version}-%{release}
 Requires: python3-core
 Provides: pypi(numpy)
 
@@ -89,24 +112,37 @@ cd %{_builddir}/numpy-1.22.3
 %patch1 -p1
 %patch3 -p1
 %patch4 -p1
+pushd ..
+cp -a numpy-1.22.3 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1652990909
+export SOURCE_DATE_EPOCH=1653337161
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
-export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
-export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
-export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
+export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
+export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
+export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
+export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
 export MAKEFLAGS=%{?_smp_mflags}
 pypi-dep-fix.py . setuptools
 python3 -m build --wheel --skip-dependency-check --no-isolation
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
+pypi-dep-fix.py . setuptools
+python3 -m build --wheel --skip-dependency-check --no-isolation
+
+popd
 
 ## build_append content
 export OPT_GENERATE="-fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic -lgcov"
@@ -153,6 +189,15 @@ pypi-dep-fix.py %{buildroot} setuptools
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
+pip install --root=%{buildroot}-v3 --no-deps --ignore-installed dist/*.whl
+popd
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -193,6 +238,14 @@ echo ----[ mark ]----
 /usr/lib/python3.10/site-packages/numpy/core/include/numpy/random/distributions.h
 /usr/lib/python3.10/site-packages/numpy/core/include/numpy/ufuncobject.h
 /usr/lib/python3.10/site-packages/numpy/core/include/numpy/utils.h
+
+%files filemap
+%defattr(-,root,root,-)
+/usr/share/clear/filemap/filemap-pypi-numpy
+
+%files lib
+%defattr(-,root,root,-)
+/usr/share/clear/optimized-elf/other*
 
 %files license
 %defattr(0644,root,root,0755)
