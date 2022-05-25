@@ -4,7 +4,7 @@
 #
 Name     : pypi-numpy
 Version  : 1.22.4
-Release  : 224
+Release  : 225
 URL      : https://files.pythonhosted.org/packages/f6/d8/ab692a75f584d13c6542c3994f75def5bce52ded9399f52e230fe402819d/numpy-1.22.4.zip
 Source0  : https://files.pythonhosted.org/packages/f6/d8/ab692a75f584d13c6542c3994f75def5bce52ded9399f52e230fe402819d/numpy-1.22.4.zip
 Summary  : NumPy is the fundamental package for array computing with Python.
@@ -33,6 +33,7 @@ Patch1: timestamp.patch
 Patch2: cve-2017-12852.nopatch
 Patch3: 0001-add-numpy-benchmarks-for-pgo.patch
 Patch4: 0001-make-distutils-support-PGO-options.patch
+Patch5: less512.patch
 
 %description
 Notes for the numpy/tools/swig directory
@@ -112,6 +113,7 @@ cd %{_builddir}/numpy-1.22.4
 %patch1 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 pushd ..
 cp -a numpy-1.22.4 buildavx2
 popd
@@ -121,7 +123,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1653409223
+export SOURCE_DATE_EPOCH=1653500940
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib

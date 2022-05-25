@@ -1,0 +1,11 @@
+--- numpy-1.22.4/numpy/distutils/ccompiler_opt.py~	2022-05-20 07:46:10.000000000 +0000
++++ numpy-1.22.4/numpy/distutils/ccompiler_opt.py	2022-05-25 17:24:22.654328424 +0000
+@@ -343,7 +343,7 @@
+             FMA4   = dict(flags="-mfma4"),
+             FMA3   = dict(flags="-mfma"),
+             AVX2   = dict(flags="-mavx2"),
+-            AVX512F = dict(flags="-mavx512f"),
++            AVX512F = dict(flags="-mavx512fodder"),
+             AVX512CD = dict(flags="-mavx512cd"),
+             AVX512_KNL = dict(flags="-mavx512er -mavx512pf"),
+             AVX512_KNM = dict(
