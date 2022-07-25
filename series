@@ -7,3 +7,4 @@ cve-2017-12852.nopatch
 0001-make-distutils-support-PGO-options.patch
 #build.patch
 #less512.patch
+0001-Force-trapping-math.patch
