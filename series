@@ -1,10 +1,9 @@
 #avx2-distutils.patch
 #avx2-fortran-distutils.patch
 timestamp.patch
-cve-2017-12852.nopatch
 #0001-AVX-Support-for-static-lib.patch
-0001-add-numpy-benchmarks-for-pgo.patch
-0001-make-distutils-support-PGO-options.patch
+#0001-add-numpy-benchmarks-for-pgo.patch
+#0001-make-distutils-support-PGO-options.patch
 #build.patch
 #less512.patch
 0001-Force-trapping-math.patch
