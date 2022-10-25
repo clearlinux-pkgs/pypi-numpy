@@ -4,7 +4,7 @@
 #
 Name     : pypi-numpy
 Version  : 1.23.4
-Release  : 239
+Release  : 240
 URL      : https://files.pythonhosted.org/packages/64/8e/9929b64e146d240507edaac2185cd5516f00b133be5b39250d253be25a64/numpy-1.23.4.tar.gz
 Source0  : https://files.pythonhosted.org/packages/64/8e/9929b64e146d240507edaac2185cd5516f00b133be5b39250d253be25a64/numpy-1.23.4.tar.gz
 Summary  : NumPy is the fundamental package for array computing with Python.
@@ -133,7 +133,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1665601274
+export SOURCE_DATE_EPOCH=1666706877
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -200,38 +200,38 @@ popd
 %defattr(-,root,root,-)
 /usr/bin/f2py
 /usr/bin/f2py3
-/usr/bin/f2py3.10
+/usr/bin/f2py3.11
 
 %files dev
 %defattr(-,root,root,-)
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/__multiarray_api.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/__ufunc_api.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/_neighborhood_iterator_imp.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/_numpyconfig.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/arrayobject.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/arrayscalars.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/experimental_dtype_api.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/halffloat.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/libdivide/libdivide.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/ndarrayobject.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/ndarraytypes.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/noprefix.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/npy_1_7_deprecated_api.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/npy_3kcompat.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/npy_common.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/npy_cpu.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/npy_endian.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/npy_interrupt.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/npy_math.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/npy_no_deprecated_api.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/npy_os.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/numpyconfig.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/old_defines.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/oldnumeric.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/random/bitgen.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/random/distributions.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/ufuncobject.h
-/usr/lib/python3.10/site-packages/numpy/core/include/numpy/utils.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/__multiarray_api.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/__ufunc_api.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/_neighborhood_iterator_imp.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/_numpyconfig.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/arrayobject.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/arrayscalars.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/experimental_dtype_api.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/halffloat.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/libdivide/libdivide.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/ndarrayobject.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/ndarraytypes.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/noprefix.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/npy_1_7_deprecated_api.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/npy_3kcompat.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/npy_common.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/npy_cpu.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/npy_endian.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/npy_interrupt.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/npy_math.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/npy_no_deprecated_api.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/npy_os.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/numpyconfig.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/old_defines.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/oldnumeric.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/random/bitgen.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/random/distributions.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/ufuncobject.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/utils.h
 
 %files filemap
 %defattr(-,root,root,-)
