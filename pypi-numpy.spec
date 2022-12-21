@@ -4,7 +4,7 @@
 #
 Name     : pypi-numpy
 Version  : 1.24.0
-Release  : 243
+Release  : 244
 URL      : https://files.pythonhosted.org/packages/5f/c7/5ca7c100dcc85b5ef1b176bdf87be5e4392c2c3018e13cc7cdef828c6a09/numpy-1.24.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/5f/c7/5ca7c100dcc85b5ef1b176bdf87be5e4392c2c3018e13cc7cdef828c6a09/numpy-1.24.0.tar.gz
 Summary  : Fundamental package for array computing in Python
