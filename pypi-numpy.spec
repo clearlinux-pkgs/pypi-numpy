@@ -4,7 +4,7 @@
 #
 Name     : pypi-numpy
 Version  : 1.24.1
-Release  : 245
+Release  : 246
 URL      : https://files.pythonhosted.org/packages/ce/b8/c170db50ec49d5845bd771bc5549fe734ee73083c5c52791915f95d8e2bc/numpy-1.24.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/ce/b8/c170db50ec49d5845bd771bc5549fe734ee73083c5c52791915f95d8e2bc/numpy-1.24.1.tar.gz
 Summary  : Fundamental package for array computing in Python
@@ -28,6 +28,9 @@ BuildRequires : pypi(setuptools)
 BuildRequires : pypi(wheel)
 BuildRequires : pypi-cython
 BuildRequires : python3-dev
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 Patch1: timestamp.patch
 Patch2: 0001-Force-trapping-math.patch
 
@@ -110,7 +113,6 @@ cd %{_builddir}/numpy-1.24.1
 %patch2 -p1
 pushd ..
 cp -a numpy-1.24.1 buildavx2
-cp -a numpy-1.24.1 buildavx512
 popd
 
 %build
@@ -121,15 +123,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1672082759
+export SOURCE_DATE_EPOCH=1672251009
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -mprefer-vector-width=512 "
-export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -mprefer-vector-width=512 "
-export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -mprefer-vector-width=512 "
-export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -mprefer-vector-width=512 "
+export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz -mprefer-vector-width=256 "
+export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz -mprefer-vector-width=256 "
+export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz -mprefer-vector-width=256 "
+export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz -mprefer-vector-width=256 "
 export MAKEFLAGS=%{?_smp_mflags}
 pypi-dep-fix.py . setuptools
 python3 -m build --wheel --skip-dependency-check --no-isolation
@@ -137,24 +139,11 @@ pushd ../buildavx2/
 ## build_prepend content
 CFLAGS="`sed -E 's/-fno-trapping-math//' <<<$CFLAGS`"
 ## build_prepend end
-export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 -msse2avx "
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
-pypi-dep-fix.py . setuptools
-python3 -m build --wheel --skip-dependency-check --no-isolation
-
-popd
-pushd ../buildavx512/
-## build_prepend content
-CFLAGS="`sed -E 's/-fno-trapping-math//' <<<$CFLAGS`"
-## build_prepend end
-export CFLAGS="$CFLAGS -m64 -march=x86-64-v4 -Wl,-z,x86-64-v4 -msse2avx "
-export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v4 -Wl,-z,x86-64-v4 "
-export FFLAGS="$FFLAGS -m64 -march=x86-64-v4 -Wl,-z,x86-64-v4 "
-export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v4 "
-export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v4 "
 pypi-dep-fix.py . setuptools
 python3 -m build --wheel --skip-dependency-check --no-isolation
 
@@ -194,14 +183,6 @@ export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
 pip install --root=%{buildroot}-v3 --no-deps --ignore-installed dist/*.whl
-popd
-pushd ../buildavx512/
-export CFLAGS="$CFLAGS -m64 -march=x86-64-v4 -Wl,-z,x86-64-v4 "
-export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v4 -Wl,-z,x86-64-v4 "
-export FFLAGS="$FFLAGS -m64 -march=x86-64-v4 -Wl,-z,x86-64-v4 "
-export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v4 "
-export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v4 "
-pip install --root=%{buildroot}-v4 --no-deps --ignore-installed dist/*.whl
 popd
 /usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 /usr/bin/elf-move.py avx512 %{buildroot}-v4 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
