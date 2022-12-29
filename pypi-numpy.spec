@@ -4,7 +4,7 @@
 #
 Name     : pypi-numpy
 Version  : 1.24.1
-Release  : 246
+Release  : 247
 URL      : https://files.pythonhosted.org/packages/ce/b8/c170db50ec49d5845bd771bc5549fe734ee73083c5c52791915f95d8e2bc/numpy-1.24.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/ce/b8/c170db50ec49d5845bd771bc5549fe734ee73083c5c52791915f95d8e2bc/numpy-1.24.1.tar.gz
 Summary  : Fundamental package for array computing in Python
@@ -123,15 +123,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1672251009
+export SOURCE_DATE_EPOCH=1672294259
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz -mprefer-vector-width=256 "
-export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz -mprefer-vector-width=256 "
-export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz -mprefer-vector-width=256 "
-export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz -mprefer-vector-width=256 "
+export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
 export MAKEFLAGS=%{?_smp_mflags}
 pypi-dep-fix.py . setuptools
 python3 -m build --wheel --skip-dependency-check --no-isolation
@@ -156,21 +156,21 @@ rm -rf %{buildroot}
 CFLAGS="`sed -E 's/-fno-trapping-math//' <<<$CFLAGS`"
 ## install_prepend end
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-numpy
-cp %{_builddir}/numpy-%{version}/LICENSE.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/219d97b2b0f9ad5186fe3e6c1240a4b20d134c37
-cp %{_builddir}/numpy-%{version}/doc/source/_static/scipy-mathjax/LICENSE %{buildroot}/usr/share/package-licenses/pypi-numpy/2b8b815229aa8a61e483fb4ba0588b8b6c491890
-cp %{_builddir}/numpy-%{version}/numpy/core/include/numpy/libdivide/LICENSE.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/c474367bace9239be97704a6272681c4c22ed9f6
-cp %{_builddir}/numpy-%{version}/numpy/core/src/umath/svml/LICENSE %{buildroot}/usr/share/package-licenses/pypi-numpy/377e8370e27122e828dfa74bd566dc98543e6bc8
-cp %{_builddir}/numpy-%{version}/numpy/linalg/lapack_lite/LICENSE.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/3ddf920aa10c8c6ea0c87d218af74651ea7d16d3
-cp %{_builddir}/numpy-%{version}/numpy/ma/LICENSE %{buildroot}/usr/share/package-licenses/pypi-numpy/85f84e10061f078b2cfaa62239c3a4bde1355f34
-cp %{_builddir}/numpy-%{version}/numpy/random/LICENSE.md %{buildroot}/usr/share/package-licenses/pypi-numpy/64796c34e3592909154742074f735b89171a4418
-cp %{_builddir}/numpy-%{version}/numpy/random/src/distributions/LICENSE.md %{buildroot}/usr/share/package-licenses/pypi-numpy/df1c41ca8a294222a81f70a142832d6566fbd889
-cp %{_builddir}/numpy-%{version}/numpy/random/src/mt19937/LICENSE.md %{buildroot}/usr/share/package-licenses/pypi-numpy/50faca55f553c4ecd9f20c020176ca65324d3604
-cp %{_builddir}/numpy-%{version}/numpy/random/src/pcg64/LICENSE.md %{buildroot}/usr/share/package-licenses/pypi-numpy/752f3cb872e3c7a6e096746e3648acaf2e065c96
-cp %{_builddir}/numpy-%{version}/numpy/random/src/philox/LICENSE.md %{buildroot}/usr/share/package-licenses/pypi-numpy/c107ade2df71a8954740468bbaa8b15e0ef4cb8b
-cp %{_builddir}/numpy-%{version}/numpy/random/src/sfc64/LICENSE.md %{buildroot}/usr/share/package-licenses/pypi-numpy/1e0aa0638753b29e98ff682cff77d40ee4700250
-cp %{_builddir}/numpy-%{version}/tools/npy_tempita/license.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/f853f54fdd704c7d99fc6eb5c8e895f3a7764f08
-cp %{_builddir}/numpy-%{version}/tools/wheels/LICENSE_linux.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/92e11f80803790b67495703271b70d4ae0588f88
-cp %{_builddir}/numpy-%{version}/tools/wheels/LICENSE_win32.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/4ecab043ed7ed37a75591ef6e28a1ec2e0de8691
+cp %{_builddir}/numpy-%{version}/LICENSE.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/219d97b2b0f9ad5186fe3e6c1240a4b20d134c37 || :
+cp %{_builddir}/numpy-%{version}/doc/source/_static/scipy-mathjax/LICENSE %{buildroot}/usr/share/package-licenses/pypi-numpy/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
+cp %{_builddir}/numpy-%{version}/numpy/core/include/numpy/libdivide/LICENSE.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/c474367bace9239be97704a6272681c4c22ed9f6 || :
+cp %{_builddir}/numpy-%{version}/numpy/core/src/umath/svml/LICENSE %{buildroot}/usr/share/package-licenses/pypi-numpy/377e8370e27122e828dfa74bd566dc98543e6bc8 || :
+cp %{_builddir}/numpy-%{version}/numpy/linalg/lapack_lite/LICENSE.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/3ddf920aa10c8c6ea0c87d218af74651ea7d16d3 || :
+cp %{_builddir}/numpy-%{version}/numpy/ma/LICENSE %{buildroot}/usr/share/package-licenses/pypi-numpy/85f84e10061f078b2cfaa62239c3a4bde1355f34 || :
+cp %{_builddir}/numpy-%{version}/numpy/random/LICENSE.md %{buildroot}/usr/share/package-licenses/pypi-numpy/64796c34e3592909154742074f735b89171a4418 || :
+cp %{_builddir}/numpy-%{version}/numpy/random/src/distributions/LICENSE.md %{buildroot}/usr/share/package-licenses/pypi-numpy/df1c41ca8a294222a81f70a142832d6566fbd889 || :
+cp %{_builddir}/numpy-%{version}/numpy/random/src/mt19937/LICENSE.md %{buildroot}/usr/share/package-licenses/pypi-numpy/50faca55f553c4ecd9f20c020176ca65324d3604 || :
+cp %{_builddir}/numpy-%{version}/numpy/random/src/pcg64/LICENSE.md %{buildroot}/usr/share/package-licenses/pypi-numpy/752f3cb872e3c7a6e096746e3648acaf2e065c96 || :
+cp %{_builddir}/numpy-%{version}/numpy/random/src/philox/LICENSE.md %{buildroot}/usr/share/package-licenses/pypi-numpy/c107ade2df71a8954740468bbaa8b15e0ef4cb8b || :
+cp %{_builddir}/numpy-%{version}/numpy/random/src/sfc64/LICENSE.md %{buildroot}/usr/share/package-licenses/pypi-numpy/1e0aa0638753b29e98ff682cff77d40ee4700250 || :
+cp %{_builddir}/numpy-%{version}/tools/npy_tempita/license.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/f853f54fdd704c7d99fc6eb5c8e895f3a7764f08 || :
+cp %{_builddir}/numpy-%{version}/tools/wheels/LICENSE_linux.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/92e11f80803790b67495703271b70d4ae0588f88 || :
+cp %{_builddir}/numpy-%{version}/tools/wheels/LICENSE_win32.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/4ecab043ed7ed37a75591ef6e28a1ec2e0de8691 || :
 pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
 pypi-dep-fix.py %{buildroot} setuptools
 echo ----[ mark ]----
