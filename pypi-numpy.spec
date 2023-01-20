@@ -4,7 +4,7 @@
 #
 Name     : pypi-numpy
 Version  : 1.24.1
-Release  : 250
+Release  : 251
 URL      : https://files.pythonhosted.org/packages/ce/b8/c170db50ec49d5845bd771bc5549fe734ee73083c5c52791915f95d8e2bc/numpy-1.24.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/ce/b8/c170db50ec49d5845bd771bc5549fe734ee73083c5c52791915f95d8e2bc/numpy-1.24.1.tar.gz
 Summary  : Fundamental package for array computing in Python
@@ -33,6 +33,7 @@ BuildRequires : python3-dev
 %define debug_package %{nil}
 Patch1: timestamp.patch
 Patch2: 0001-Force-trapping-math.patch
+Patch3: more-avx.patch
 
 %description
 <img src="/branding/logo/primary/numpylogo.svg" width="300">
@@ -111,6 +112,7 @@ python3 components for the pypi-numpy package.
 cd %{_builddir}/numpy-1.24.1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 pushd ..
 cp -a numpy-1.24.1 buildavx2
 popd
@@ -123,7 +125,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1672294259
+export SOURCE_DATE_EPOCH=1674250420
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
