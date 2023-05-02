@@ -5,15 +5,13 @@
 #
 Name     : pypi-numpy
 Version  : 1.24.3
-Release  : 253
+Release  : 254
 URL      : https://files.pythonhosted.org/packages/2c/d4/590ae7df5044465cc9fa2db152ae12468694d62d952b1528ecff328ef7fc/numpy-1.24.3.tar.gz
 Source0  : https://files.pythonhosted.org/packages/2c/d4/590ae7df5044465cc9fa2db152ae12468694d62d952b1528ecff328ef7fc/numpy-1.24.3.tar.gz
 Summary  : Fundamental package for array computing in Python
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause MIT NCSA Python-2.0 Zlib
 Requires: pypi-numpy-bin = %{version}-%{release}
-Requires: pypi-numpy-filemap = %{version}-%{release}
-Requires: pypi-numpy-lib = %{version}-%{release}
 Requires: pypi-numpy-license = %{version}-%{release}
 Requires: pypi-numpy-python = %{version}-%{release}
 Requires: pypi-numpy-python3 = %{version}-%{release}
@@ -39,7 +37,6 @@ Patch3: more-avx.patch
 Summary: bin components for the pypi-numpy package.
 Group: Binaries
 Requires: pypi-numpy-license = %{version}-%{release}
-Requires: pypi-numpy-filemap = %{version}-%{release}
 
 %description bin
 bin components for the pypi-numpy package.
@@ -48,31 +45,12 @@ bin components for the pypi-numpy package.
 %package dev
 Summary: dev components for the pypi-numpy package.
 Group: Development
-Requires: pypi-numpy-lib = %{version}-%{release}
 Requires: pypi-numpy-bin = %{version}-%{release}
 Provides: pypi-numpy-devel = %{version}-%{release}
 Requires: pypi-numpy = %{version}-%{release}
 
 %description dev
 dev components for the pypi-numpy package.
-
-
-%package filemap
-Summary: filemap components for the pypi-numpy package.
-Group: Default
-
-%description filemap
-filemap components for the pypi-numpy package.
-
-
-%package lib
-Summary: lib components for the pypi-numpy package.
-Group: Libraries
-Requires: pypi-numpy-license = %{version}-%{release}
-Requires: pypi-numpy-filemap = %{version}-%{release}
-
-%description lib
-lib components for the pypi-numpy package.
 
 
 %package license
@@ -95,7 +73,6 @@ python components for the pypi-numpy package.
 %package python3
 Summary: python3 components for the pypi-numpy package.
 Group: Default
-Requires: pypi-numpy-filemap = %{version}-%{release}
 Requires: python3-core
 Provides: pypi(numpy)
 
@@ -121,15 +98,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1682272861
+export SOURCE_DATE_EPOCH=1683042028
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export MAKEFLAGS=%{?_smp_mflags}
 pypi-dep-fix.py . setuptools
 python3 -m build --wheel --skip-dependency-check --no-isolation
@@ -225,14 +202,6 @@ popd
 /usr/lib/python3.11/site-packages/numpy/core/include/numpy/ufuncobject.h
 /usr/lib/python3.11/site-packages/numpy/core/include/numpy/utils.h
 
-%files filemap
-%defattr(-,root,root,-)
-/usr/share/clear/filemap/filemap-pypi-numpy
-
-%files lib
-%defattr(-,root,root,-)
-/usr/share/clear/optimized-elf/other*
-
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/pypi-numpy/1e0aa0638753b29e98ff682cff77d40ee4700250
@@ -256,4 +225,5 @@ popd
 
 %files python3
 %defattr(-,root,root,-)
+/V3/usr/lib/python3*/*
 /usr/lib/python3*/*
