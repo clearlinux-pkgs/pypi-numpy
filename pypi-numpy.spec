@@ -5,7 +5,7 @@
 #
 Name     : pypi-numpy
 Version  : 1.24.3
-Release  : 254
+Release  : 255
 URL      : https://files.pythonhosted.org/packages/2c/d4/590ae7df5044465cc9fa2db152ae12468694d62d952b1528ecff328ef7fc/numpy-1.24.3.tar.gz
 Source0  : https://files.pythonhosted.org/packages/2c/d4/590ae7df5044465cc9fa2db152ae12468694d62d952b1528ecff328ef7fc/numpy-1.24.3.tar.gz
 Summary  : Fundamental package for array computing in Python
@@ -20,6 +20,9 @@ Requires: openblas
 BuildRequires : buildreq-distutils3
 BuildRequires : gfortran
 BuildRequires : openblas
+BuildRequires : pypi(cython)
+BuildRequires : pypi(setuptools)
+BuildRequires : pypi(wheel)
 BuildRequires : pypi-cython
 BuildRequires : python3-dev
 # Suppress stripping binaries
@@ -98,7 +101,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683042028
+export SOURCE_DATE_EPOCH=1685554396
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
