@@ -4,10 +4,10 @@
 # Using build pattern: pyproject
 #
 Name     : pypi-numpy
-Version  : 1.24.3
-Release  : 255
-URL      : https://files.pythonhosted.org/packages/2c/d4/590ae7df5044465cc9fa2db152ae12468694d62d952b1528ecff328ef7fc/numpy-1.24.3.tar.gz
-Source0  : https://files.pythonhosted.org/packages/2c/d4/590ae7df5044465cc9fa2db152ae12468694d62d952b1528ecff328ef7fc/numpy-1.24.3.tar.gz
+Version  : 1.25.0
+Release  : 256
+URL      : https://files.pythonhosted.org/packages/d0/b2/fe774844d1857804cc884bba67bec38f649c99d0dc1ee7cbbf1da601357c/numpy-1.25.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/d0/b2/fe774844d1857804cc884bba67bec38f649c99d0dc1ee7cbbf1da601357c/numpy-1.25.0.tar.gz
 Summary  : Fundamental package for array computing in Python
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause MIT NCSA Python-2.0 Zlib
@@ -29,12 +29,11 @@ BuildRequires : python3-dev
 %define __strip /bin/true
 %define debug_package %{nil}
 Patch1: timestamp.patch
-Patch2: 0001-Force-trapping-math.patch
-Patch3: more-avx.patch
+Patch2: more-avx.patch
 
 %description
-<img src="/branding/logo/primary/numpylogo.svg" width="300">
-        </h1><br>
+Notes for the numpy/tools/swig directory
+========================================
 
 %package bin
 Summary: bin components for the pypi-numpy package.
@@ -84,13 +83,12 @@ python3 components for the pypi-numpy package.
 
 
 %prep
-%setup -q -n numpy-1.24.3
-cd %{_builddir}/numpy-1.24.3
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
+%setup -q -n numpy-1.25.0
+cd %{_builddir}/numpy-1.25.0
+%patch -P 1 -p1
+%patch -P 2 -p1
 pushd ..
-cp -a numpy-1.24.3 buildavx2
+cp -a numpy-1.25.0 buildavx2
 popd
 
 %build
@@ -101,7 +99,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1685554396
+export SOURCE_DATE_EPOCH=1687279644
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -134,9 +132,9 @@ rm -rf %{buildroot}
 CFLAGS="`sed -E 's/-fno-trapping-math//' <<<$CFLAGS`"
 ## install_prepend end
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-numpy
-cp %{_builddir}/numpy-%{version}/LICENSE.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/219d97b2b0f9ad5186fe3e6c1240a4b20d134c37 || :
 cp %{_builddir}/numpy-%{version}/doc/source/_static/scipy-mathjax/LICENSE %{buildroot}/usr/share/package-licenses/pypi-numpy/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
 cp %{_builddir}/numpy-%{version}/numpy/core/include/numpy/libdivide/LICENSE.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/c474367bace9239be97704a6272681c4c22ed9f6 || :
+cp %{_builddir}/numpy-%{version}/numpy/core/src/npysort/x86-simd-sort/LICENSE.md %{buildroot}/usr/share/package-licenses/pypi-numpy/02c3ba5d58e6a8a955b464ba01bf7af2828fd342 || :
 cp %{_builddir}/numpy-%{version}/numpy/core/src/umath/svml/LICENSE %{buildroot}/usr/share/package-licenses/pypi-numpy/377e8370e27122e828dfa74bd566dc98543e6bc8 || :
 cp %{_builddir}/numpy-%{version}/numpy/linalg/lapack_lite/LICENSE.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/3ddf920aa10c8c6ea0c87d218af74651ea7d16d3 || :
 cp %{_builddir}/numpy-%{version}/numpy/ma/LICENSE %{buildroot}/usr/share/package-licenses/pypi-numpy/85f84e10061f078b2cfaa62239c3a4bde1355f34 || :
@@ -178,6 +176,7 @@ popd
 %defattr(-,root,root,-)
 /usr/lib/python3.11/site-packages/numpy/core/include/numpy/__multiarray_api.h
 /usr/lib/python3.11/site-packages/numpy/core/include/numpy/__ufunc_api.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/_dtype_api.h
 /usr/lib/python3.11/site-packages/numpy/core/include/numpy/_neighborhood_iterator_imp.h
 /usr/lib/python3.11/site-packages/numpy/core/include/numpy/_numpyconfig.h
 /usr/lib/python3.11/site-packages/numpy/core/include/numpy/arrayobject.h
@@ -207,8 +206,8 @@ popd
 
 %files license
 %defattr(0644,root,root,0755)
+/usr/share/package-licenses/pypi-numpy/02c3ba5d58e6a8a955b464ba01bf7af2828fd342
 /usr/share/package-licenses/pypi-numpy/1e0aa0638753b29e98ff682cff77d40ee4700250
-/usr/share/package-licenses/pypi-numpy/219d97b2b0f9ad5186fe3e6c1240a4b20d134c37
 /usr/share/package-licenses/pypi-numpy/2b8b815229aa8a61e483fb4ba0588b8b6c491890
 /usr/share/package-licenses/pypi-numpy/377e8370e27122e828dfa74bd566dc98543e6bc8
 /usr/share/package-licenses/pypi-numpy/3ddf920aa10c8c6ea0c87d218af74651ea7d16d3
