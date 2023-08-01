@@ -4,10 +4,10 @@
 # Using build pattern: pyproject
 #
 Name     : pypi-numpy
-Version  : 1.25.1
-Release  : 257
-URL      : https://files.pythonhosted.org/packages/cf/7a/f68d1d658a0e68084097beb212fa9356fee7eabff8b57231cc4acb555b12/numpy-1.25.1.tar.gz
-Source0  : https://files.pythonhosted.org/packages/cf/7a/f68d1d658a0e68084097beb212fa9356fee7eabff8b57231cc4acb555b12/numpy-1.25.1.tar.gz
+Version  : 1.25.2
+Release  : 258
+URL      : https://files.pythonhosted.org/packages/a0/41/8f53eff8e969dd8576ddfb45e7ed315407d27c7518ae49418be8ed532b07/numpy-1.25.2.tar.gz
+Source0  : https://files.pythonhosted.org/packages/a0/41/8f53eff8e969dd8576ddfb45e7ed315407d27c7518ae49418be8ed532b07/numpy-1.25.2.tar.gz
 Summary  : Fundamental package for array computing in Python
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause MIT NCSA Python-2.0 Zlib
@@ -83,12 +83,12 @@ python3 components for the pypi-numpy package.
 
 
 %prep
-%setup -q -n numpy-1.25.1
-cd %{_builddir}/numpy-1.25.1
+%setup -q -n numpy-1.25.2
+cd %{_builddir}/numpy-1.25.2
 %patch -P 1 -p1
 %patch -P 2 -p1
 pushd ..
-cp -a numpy-1.25.1 buildavx2
+cp -a numpy-1.25.2 buildavx2
 popd
 
 %build
@@ -99,7 +99,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1689004763
+export SOURCE_DATE_EPOCH=1690901979
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
