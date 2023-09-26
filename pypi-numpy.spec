@@ -4,10 +4,10 @@
 # Using build pattern: pyproject
 #
 Name     : pypi-numpy
-Version  : 1.25.2
-Release  : 258
-URL      : https://files.pythonhosted.org/packages/a0/41/8f53eff8e969dd8576ddfb45e7ed315407d27c7518ae49418be8ed532b07/numpy-1.25.2.tar.gz
-Source0  : https://files.pythonhosted.org/packages/a0/41/8f53eff8e969dd8576ddfb45e7ed315407d27c7518ae49418be8ed532b07/numpy-1.25.2.tar.gz
+Version  : 1.26.0
+Release  : 259
+URL      : https://files.pythonhosted.org/packages/55/b3/b13bce39ba82b7398c06d10446f5ffd5c07db39b09bd37370dc720c7951c/numpy-1.26.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/55/b3/b13bce39ba82b7398c06d10446f5ffd5c07db39b09bd37370dc720c7951c/numpy-1.26.0.tar.gz
 Summary  : Fundamental package for array computing in Python
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause MIT NCSA Python-2.0 Zlib
@@ -19,10 +19,14 @@ Requires: gcc-libs-math
 Requires: openblas
 BuildRequires : buildreq-distutils3
 BuildRequires : gfortran
+BuildRequires : meson
+BuildRequires : ninja
 BuildRequires : openblas
+BuildRequires : pkgconfig(openblas)
+BuildRequires : pypi(colorama)
 BuildRequires : pypi(cython)
+BuildRequires : pypi(pyproject_metadata)
 BuildRequires : pypi(setuptools)
-BuildRequires : pypi(wheel)
 BuildRequires : pypi-cython
 BuildRequires : python3-dev
 # Suppress stripping binaries
@@ -32,8 +36,10 @@ Patch1: timestamp.patch
 Patch2: more-avx.patch
 
 %description
-Notes for the numpy/tools/swig directory
-========================================
+ftdetect sets the filetype
+ftplugin sets Meson indentation rules
+indent does Meson indentation
+syntax does Meson syntax highlighting
 
 %package bin
 Summary: bin components for the pypi-numpy package.
@@ -76,19 +82,19 @@ python components for the pypi-numpy package.
 Summary: python3 components for the pypi-numpy package.
 Group: Default
 Requires: python3-core
-Provides: pypi(numpy)
+Provides: pypi(gcc)
 
 %description python3
 python3 components for the pypi-numpy package.
 
 
 %prep
-%setup -q -n numpy-1.25.2
-cd %{_builddir}/numpy-1.25.2
+%setup -q -n numpy-1.26.0
+cd %{_builddir}/numpy-1.26.0
 %patch -P 1 -p1
 %patch -P 2 -p1
 pushd ..
-cp -a numpy-1.25.2 buildavx2
+cp -a numpy-1.26.0 buildavx2
 popd
 
 %build
@@ -99,7 +105,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1690901979
+export SOURCE_DATE_EPOCH=1695749326
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -132,6 +138,7 @@ rm -rf %{buildroot}
 CFLAGS="`sed -E 's/-fno-trapping-math//' <<<$CFLAGS`"
 ## install_prepend end
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-numpy
+cp %{_builddir}/numpy-%{version}/.spin/LICENSE %{buildroot}/usr/share/package-licenses/pypi-numpy/4e1f58ec402d86cee7b2f8516dc6440094042864 || :
 cp %{_builddir}/numpy-%{version}/doc/source/_static/scipy-mathjax/LICENSE %{buildroot}/usr/share/package-licenses/pypi-numpy/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
 cp %{_builddir}/numpy-%{version}/numpy/core/include/numpy/libdivide/LICENSE.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/c474367bace9239be97704a6272681c4c22ed9f6 || :
 cp %{_builddir}/numpy-%{version}/numpy/core/src/npysort/x86-simd-sort/LICENSE.md %{buildroot}/usr/share/package-licenses/pypi-numpy/02c3ba5d58e6a8a955b464ba01bf7af2828fd342 || :
@@ -147,6 +154,11 @@ cp %{_builddir}/numpy-%{version}/numpy/random/src/sfc64/LICENSE.md %{buildroot}/
 cp %{_builddir}/numpy-%{version}/tools/npy_tempita/license.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/f853f54fdd704c7d99fc6eb5c8e895f3a7764f08 || :
 cp %{_builddir}/numpy-%{version}/tools/wheels/LICENSE_linux.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/92e11f80803790b67495703271b70d4ae0588f88 || :
 cp %{_builddir}/numpy-%{version}/tools/wheels/LICENSE_win32.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/4ecab043ed7ed37a75591ef6e28a1ec2e0de8691 || :
+cp %{_builddir}/numpy-%{version}/vendored-meson/meson-python/LICENSE %{buildroot}/usr/share/package-licenses/pypi-numpy/d35307a363044e8931785c522493cbde4429981a || :
+cp %{_builddir}/numpy-%{version}/vendored-meson/meson-python/LICENSES/MIT.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/d35307a363044e8931785c522493cbde4429981a || :
+cp %{_builddir}/numpy-%{version}/vendored-meson/meson/COPYING %{buildroot}/usr/share/package-licenses/pypi-numpy/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
+cp %{_builddir}/numpy-%{version}/vendored-meson/meson/packaging/License.rtf %{buildroot}/usr/share/package-licenses/pypi-numpy/00dcd169768382e0b6a13d0d110266754fedb62b || :
+cp %{_builddir}/numpy-%{version}/vendored-meson/meson/packaging/macpages/English.lproj/license.html %{buildroot}/usr/share/package-licenses/pypi-numpy/ed59b8ab4e260b632c935598bf0d1472e4e2dbdf || :
 pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
 pypi-dep-fix.py %{buildroot} setuptools
 echo ----[ mark ]----
@@ -169,8 +181,6 @@ popd
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/f2py
-/usr/bin/f2py3
-/usr/bin/f2py3.11
 
 %files dev
 %defattr(-,root,root,-)
@@ -183,7 +193,6 @@ popd
 /usr/lib/python3.11/site-packages/numpy/core/include/numpy/arrayscalars.h
 /usr/lib/python3.11/site-packages/numpy/core/include/numpy/experimental_dtype_api.h
 /usr/lib/python3.11/site-packages/numpy/core/include/numpy/halffloat.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/libdivide/libdivide.h
 /usr/lib/python3.11/site-packages/numpy/core/include/numpy/ndarrayobject.h
 /usr/lib/python3.11/site-packages/numpy/core/include/numpy/ndarraytypes.h
 /usr/lib/python3.11/site-packages/numpy/core/include/numpy/noprefix.h
@@ -198,19 +207,21 @@ popd
 /usr/lib/python3.11/site-packages/numpy/core/include/numpy/npy_os.h
 /usr/lib/python3.11/site-packages/numpy/core/include/numpy/numpyconfig.h
 /usr/lib/python3.11/site-packages/numpy/core/include/numpy/old_defines.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/oldnumeric.h
 /usr/lib/python3.11/site-packages/numpy/core/include/numpy/random/bitgen.h
 /usr/lib/python3.11/site-packages/numpy/core/include/numpy/random/distributions.h
+/usr/lib/python3.11/site-packages/numpy/core/include/numpy/random/libdivide.h
 /usr/lib/python3.11/site-packages/numpy/core/include/numpy/ufuncobject.h
 /usr/lib/python3.11/site-packages/numpy/core/include/numpy/utils.h
 
 %files license
 %defattr(0644,root,root,0755)
+/usr/share/package-licenses/pypi-numpy/00dcd169768382e0b6a13d0d110266754fedb62b
 /usr/share/package-licenses/pypi-numpy/02c3ba5d58e6a8a955b464ba01bf7af2828fd342
 /usr/share/package-licenses/pypi-numpy/1e0aa0638753b29e98ff682cff77d40ee4700250
 /usr/share/package-licenses/pypi-numpy/2b8b815229aa8a61e483fb4ba0588b8b6c491890
 /usr/share/package-licenses/pypi-numpy/377e8370e27122e828dfa74bd566dc98543e6bc8
 /usr/share/package-licenses/pypi-numpy/3ddf920aa10c8c6ea0c87d218af74651ea7d16d3
+/usr/share/package-licenses/pypi-numpy/4e1f58ec402d86cee7b2f8516dc6440094042864
 /usr/share/package-licenses/pypi-numpy/4ecab043ed7ed37a75591ef6e28a1ec2e0de8691
 /usr/share/package-licenses/pypi-numpy/50faca55f553c4ecd9f20c020176ca65324d3604
 /usr/share/package-licenses/pypi-numpy/64796c34e3592909154742074f735b89171a4418
@@ -219,7 +230,9 @@ popd
 /usr/share/package-licenses/pypi-numpy/92e11f80803790b67495703271b70d4ae0588f88
 /usr/share/package-licenses/pypi-numpy/c107ade2df71a8954740468bbaa8b15e0ef4cb8b
 /usr/share/package-licenses/pypi-numpy/c474367bace9239be97704a6272681c4c22ed9f6
+/usr/share/package-licenses/pypi-numpy/d35307a363044e8931785c522493cbde4429981a
 /usr/share/package-licenses/pypi-numpy/df1c41ca8a294222a81f70a142832d6566fbd889
+/usr/share/package-licenses/pypi-numpy/ed59b8ab4e260b632c935598bf0d1472e4e2dbdf
 /usr/share/package-licenses/pypi-numpy/f853f54fdd704c7d99fc6eb5c8e895f3a7764f08
 
 %files python
