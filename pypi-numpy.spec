@@ -5,7 +5,7 @@
 #
 Name     : pypi-numpy
 Version  : 1.26.0
-Release  : 260
+Release  : 261
 URL      : https://files.pythonhosted.org/packages/55/b3/b13bce39ba82b7398c06d10446f5ffd5c07db39b09bd37370dc720c7951c/numpy-1.26.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/55/b3/b13bce39ba82b7398c06d10446f5ffd5c07db39b09bd37370dc720c7951c/numpy-1.26.0.tar.gz
 Summary  : Fundamental package for array computing in Python
@@ -83,6 +83,7 @@ Summary: python3 components for the pypi-numpy package.
 Group: Default
 Requires: python3-core
 Provides: pypi(gcc)
+Provides: pypi(numpy)
 
 %description python3
 python3 components for the pypi-numpy package.
@@ -105,7 +106,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1695823827
+export SOURCE_DATE_EPOCH=1695824185
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
