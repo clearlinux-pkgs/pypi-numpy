@@ -5,7 +5,7 @@
 #
 Name     : pypi-numpy
 Version  : 1.26.0
-Release  : 261
+Release  : 262
 URL      : https://files.pythonhosted.org/packages/55/b3/b13bce39ba82b7398c06d10446f5ffd5c07db39b09bd37370dc720c7951c/numpy-1.26.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/55/b3/b13bce39ba82b7398c06d10446f5ffd5c07db39b09bd37370dc720c7951c/numpy-1.26.0.tar.gz
 Summary  : Fundamental package for array computing in Python
@@ -106,15 +106,21 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1695824185
+export SOURCE_DATE_EPOCH=1697220179
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS"
+CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS"
+FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
+FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
+ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
+LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
 export MAKEFLAGS=%{?_smp_mflags}
 pypi-dep-fix.py . setuptools
 python3 -m build --wheel --skip-dependency-check --no-isolation
@@ -122,17 +128,31 @@ pushd ../buildavx2/
 ## build_prepend content
 CFLAGS="`sed -E 's/-fno-trapping-math//' <<<$CFLAGS`"
 ## build_prepend end
-export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
-export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
-export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
-export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
-export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
+CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS -m64 -march=x86-64-v3 "
+LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS -m64 -march=x86-64-v3 "
 pypi-dep-fix.py . setuptools
 python3 -m build --wheel --skip-dependency-check --no-isolation
 
 popd
 
 %install
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS"
+CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS"
+FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
+FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
+ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
+LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 ## install_prepend content
@@ -160,18 +180,18 @@ cp %{_builddir}/numpy-%{version}/vendored-meson/meson-python/LICENSES/MIT.txt %{
 cp %{_builddir}/numpy-%{version}/vendored-meson/meson/COPYING %{buildroot}/usr/share/package-licenses/pypi-numpy/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
 cp %{_builddir}/numpy-%{version}/vendored-meson/meson/packaging/License.rtf %{buildroot}/usr/share/package-licenses/pypi-numpy/00dcd169768382e0b6a13d0d110266754fedb62b || :
 cp %{_builddir}/numpy-%{version}/vendored-meson/meson/packaging/macpages/English.lproj/license.html %{buildroot}/usr/share/package-licenses/pypi-numpy/ed59b8ab4e260b632c935598bf0d1472e4e2dbdf || :
-pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
+python3 -m installer --destdir=%{buildroot} dist/*.whl
 pypi-dep-fix.py %{buildroot} setuptools
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
 pushd ../buildavx2/
-export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
-export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
-export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
-export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
-export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
-pip install --root=%{buildroot}-v3 --no-deps --ignore-installed dist/*.whl
+CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS -m64 -march=x86-64-v3 "
+LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS -m64 -march=x86-64-v3 "
+python3 -m installer --destdir=%{buildroot}-v3 dist/*.whl
 popd
 /usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 /usr/bin/elf-move.py avx512 %{buildroot}-v4 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
@@ -185,34 +205,34 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/__multiarray_api.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/__ufunc_api.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/_dtype_api.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/_neighborhood_iterator_imp.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/_numpyconfig.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/arrayobject.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/arrayscalars.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/experimental_dtype_api.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/halffloat.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/ndarrayobject.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/ndarraytypes.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/noprefix.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/npy_1_7_deprecated_api.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/npy_3kcompat.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/npy_common.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/npy_cpu.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/npy_endian.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/npy_interrupt.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/npy_math.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/npy_no_deprecated_api.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/npy_os.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/numpyconfig.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/old_defines.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/random/bitgen.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/random/distributions.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/random/libdivide.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/ufuncobject.h
-/usr/lib/python3.11/site-packages/numpy/core/include/numpy/utils.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/__multiarray_api.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/__ufunc_api.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/_dtype_api.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/_neighborhood_iterator_imp.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/_numpyconfig.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/arrayobject.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/arrayscalars.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/experimental_dtype_api.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/halffloat.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/ndarrayobject.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/ndarraytypes.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/noprefix.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/npy_1_7_deprecated_api.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/npy_3kcompat.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/npy_common.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/npy_cpu.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/npy_endian.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/npy_interrupt.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/npy_math.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/npy_no_deprecated_api.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/npy_os.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/numpyconfig.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/old_defines.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/random/bitgen.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/random/distributions.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/random/libdivide.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/ufuncobject.h
+/usr/lib/python3.12/site-packages/numpy/core/include/numpy/utils.h
 
 %files license
 %defattr(0644,root,root,0755)
