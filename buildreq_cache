@@ -1,2 +1,2 @@
-1.26.0
-pkgconfig(openblas)
+1.26.1
+pkgconfig(scipy-openblas)
