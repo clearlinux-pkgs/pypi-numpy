@@ -7,7 +7,7 @@
 #
 Name     : pypi-numpy
 Version  : 1.26.2
-Release  : 265
+Release  : 266
 URL      : https://files.pythonhosted.org/packages/dd/2b/205ddff2314d4eea852e31d53b8e55eb3f32b292efc3dd86bd827ab9019d/numpy-1.26.2.tar.gz
 Source0  : https://files.pythonhosted.org/packages/dd/2b/205ddff2314d4eea852e31d53b8e55eb3f32b292efc3dd86bd827ab9019d/numpy-1.26.2.tar.gz
 Summary  : Fundamental package for array computing in Python
