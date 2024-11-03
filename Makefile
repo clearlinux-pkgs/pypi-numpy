@@ -1,5 +1,5 @@
 PKG_NAME := pypi-numpy
-URL = https://files.pythonhosted.org/packages/4b/d1/8a730ea07f4a37d94f9172f4ce1d81064b7a64766b460378be278952de75/numpy-2.1.2.tar.gz
+URL = https://files.pythonhosted.org/packages/25/ca/1166b75c21abd1da445b97bf1fa2f14f423c6cfb4fc7c4ef31dccf9f6a94/numpy-2.1.3.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
