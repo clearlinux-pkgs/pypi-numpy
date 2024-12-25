@@ -6,10 +6,10 @@
 # autospec commit: 5424026
 #
 Name     : pypi-numpy
-Version  : 2.2.0
-Release  : 286
-URL      : https://files.pythonhosted.org/packages/47/1b/1d565e0f6e156e1522ab564176b8b29d71e13d8caf003a08768df3d5cec5/numpy-2.2.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/47/1b/1d565e0f6e156e1522ab564176b8b29d71e13d8caf003a08768df3d5cec5/numpy-2.2.0.tar.gz
+Version  : 2.2.1
+Release  : 287
+URL      : https://files.pythonhosted.org/packages/f2/a5/fdbf6a7871703df6160b5cf3dd774074b086d278172285c52c2758b76305/numpy-2.2.1.tar.gz
+Source0  : https://files.pythonhosted.org/packages/f2/a5/fdbf6a7871703df6160b5cf3dd774074b086d278172285c52c2758b76305/numpy-2.2.1.tar.gz
 Summary  : Fundamental package for array computing in Python
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause MIT NCSA Python-2.0 Zlib
@@ -86,14 +86,14 @@ python3 components for the pypi-numpy package.
 
 
 %prep
-%setup -q -n numpy-2.2.0
-cd %{_builddir}/numpy-2.2.0
+%setup -q -n numpy-2.2.1
+cd %{_builddir}/numpy-2.2.1
 %patch -P 1 -p1
 pushd ..
-cp -a numpy-2.2.0 buildavx2
+cp -a numpy-2.2.1 buildavx2
 popd
 pushd ..
-cp -a numpy-2.2.0 buildavx512
+cp -a numpy-2.2.1 buildavx512
 popd
 
 %build
@@ -101,7 +101,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1733822245
+export SOURCE_DATE_EPOCH=1735097978
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
