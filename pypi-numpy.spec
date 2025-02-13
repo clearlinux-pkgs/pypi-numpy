@@ -7,7 +7,7 @@
 #
 Name     : pypi-numpy
 Version  : 2.2.3
-Release  : 289
+Release  : 290
 URL      : https://files.pythonhosted.org/packages/fb/90/8956572f5c4ae52201fdec7ba2044b2c882832dcec7d5d0922c9e9acf2de/numpy-2.2.3.tar.gz
 Source0  : https://files.pythonhosted.org/packages/fb/90/8956572f5c4ae52201fdec7ba2044b2c882832dcec7d5d0922c9e9acf2de/numpy-2.2.3.tar.gz
 Summary  : Fundamental package for array computing in Python
