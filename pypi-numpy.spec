@@ -6,10 +6,10 @@
 # autospec commit: fbbd4e3
 #
 Name     : pypi-numpy
-Version  : 2.2.3
-Release  : 291
-URL      : https://files.pythonhosted.org/packages/fb/90/8956572f5c4ae52201fdec7ba2044b2c882832dcec7d5d0922c9e9acf2de/numpy-2.2.3.tar.gz
-Source0  : https://files.pythonhosted.org/packages/fb/90/8956572f5c4ae52201fdec7ba2044b2c882832dcec7d5d0922c9e9acf2de/numpy-2.2.3.tar.gz
+Version  : 2.2.4
+Release  : 292
+URL      : https://files.pythonhosted.org/packages/e1/78/31103410a57bc2c2b93a3597340a8119588571f6a4539067546cb9a0bfac/numpy-2.2.4.tar.gz
+Source0  : https://files.pythonhosted.org/packages/e1/78/31103410a57bc2c2b93a3597340a8119588571f6a4539067546cb9a0bfac/numpy-2.2.4.tar.gz
 Summary  : Fundamental package for array computing in Python
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause MIT NCSA Python-2.0 Zlib
@@ -34,8 +34,10 @@ BuildRequires : python3-dev
 Patch1: timestamp.patch
 
 %description
-Notes for the numpy/tools/swig directory
-========================================
+ftdetect sets the filetype
+ftplugin sets Meson indentation rules
+indent does Meson indentation
+syntax does Meson syntax highlighting
 
 %package bin
 Summary: bin components for the pypi-numpy package.
@@ -86,17 +88,17 @@ python3 components for the pypi-numpy package.
 
 
 %prep
-%setup -q -n numpy-2.2.3
-cd %{_builddir}/numpy-2.2.3
+%setup -q -n numpy-2.2.4
+cd %{_builddir}/numpy-2.2.4
 %patch -P 1 -p1
 pushd ..
-cp -a numpy-2.2.3 buildavx2
+cp -a numpy-2.2.4 buildavx2
 popd
 pushd ..
-cp -a numpy-2.2.3 buildavx512
+cp -a numpy-2.2.4 buildavx512
 popd
 pushd ..
-cp -a numpy-2.2.3 buildapx
+cp -a numpy-2.2.4 buildapx
 popd
 
 %build
@@ -104,7 +106,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1740083018
+export SOURCE_DATE_EPOCH=1742459332
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
