@@ -6,10 +6,10 @@
 # autospec commit: 65cf152
 #
 Name     : pypi-numpy
-Version  : 2.3.0
-Release  : 295
-URL      : https://files.pythonhosted.org/packages/f3/db/8e12381333aea300890829a0a36bfa738cac95475d88982d538725143fd9/numpy-2.3.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/f3/db/8e12381333aea300890829a0a36bfa738cac95475d88982d538725143fd9/numpy-2.3.0.tar.gz
+Version  : 2.3.1
+Release  : 296
+URL      : https://files.pythonhosted.org/packages/2e/19/d7c972dfe90a353dbd3efbbe1d14a5951de80c99c9dc1b93cd998d51dc0f/numpy-2.3.1.tar.gz
+Source0  : https://files.pythonhosted.org/packages/2e/19/d7c972dfe90a353dbd3efbbe1d14a5951de80c99c9dc1b93cd998d51dc0f/numpy-2.3.1.tar.gz
 Summary  : Fundamental package for array computing in Python
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause MIT NCSA Python-2.0 Zlib
@@ -88,17 +88,17 @@ python3 components for the pypi-numpy package.
 
 
 %prep
-%setup -q -n numpy-2.3.0
-cd %{_builddir}/numpy-2.3.0
+%setup -q -n numpy-2.3.1
+cd %{_builddir}/numpy-2.3.1
 %patch -P 1 -p1
 pushd ..
-cp -a numpy-2.3.0 buildavx2
+cp -a numpy-2.3.1 buildavx2
 popd
 pushd ..
-cp -a numpy-2.3.0 buildavx512
+cp -a numpy-2.3.1 buildavx512
 popd
 pushd ..
-cp -a numpy-2.3.0 buildapx
+cp -a numpy-2.3.1 buildapx
 popd
 
 %build
@@ -106,7 +106,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1749567162
+export SOURCE_DATE_EPOCH=1750689852
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -182,6 +182,9 @@ cp %{_builddir}/numpy-%{version}/numpy/random/src/mt19937/LICENSE.md %{buildroot
 cp %{_builddir}/numpy-%{version}/numpy/random/src/pcg64/LICENSE.md %{buildroot}/usr/share/package-licenses/pypi-numpy/752f3cb872e3c7a6e096746e3648acaf2e065c96 || :
 cp %{_builddir}/numpy-%{version}/numpy/random/src/philox/LICENSE.md %{buildroot}/usr/share/package-licenses/pypi-numpy/c107ade2df71a8954740468bbaa8b15e0ef4cb8b || :
 cp %{_builddir}/numpy-%{version}/numpy/random/src/sfc64/LICENSE.md %{buildroot}/usr/share/package-licenses/pypi-numpy/1e0aa0638753b29e98ff682cff77d40ee4700250 || :
+cp %{_builddir}/numpy-%{version}/tools/wheels/LICENSE_linux.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/b4d2f13f23b03cab5829a7afc8d71ceb1d2700a5 || :
+cp %{_builddir}/numpy-%{version}/tools/wheels/LICENSE_osx.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/ea1263113ef589c02b6f622ffb73162bdbafaf09 || :
+cp %{_builddir}/numpy-%{version}/tools/wheels/LICENSE_win32.txt %{buildroot}/usr/share/package-licenses/pypi-numpy/614772ec1c0849d9162362c4d4a1f010fcd7f51e || :
 cp %{_builddir}/numpy-%{version}/vendored-meson/meson/COPYING %{buildroot}/usr/share/package-licenses/pypi-numpy/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
 cp %{_builddir}/numpy-%{version}/vendored-meson/meson/packaging/License.rtf %{buildroot}/usr/share/package-licenses/pypi-numpy/00dcd169768382e0b6a13d0d110266754fedb62b || :
 cp %{_builddir}/numpy-%{version}/vendored-meson/meson/packaging/macpages/English.lproj/license.html %{buildroot}/usr/share/package-licenses/pypi-numpy/ed59b8ab4e260b632c935598bf0d1472e4e2dbdf || :
@@ -258,6 +261,7 @@ popd
 /usr/share/package-licenses/pypi-numpy/4e1f58ec402d86cee7b2f8516dc6440094042864
 /usr/share/package-licenses/pypi-numpy/50faca55f553c4ecd9f20c020176ca65324d3604
 /usr/share/package-licenses/pypi-numpy/58853eb8199b5afe72a73a25fd8cf8c94285174b
+/usr/share/package-licenses/pypi-numpy/614772ec1c0849d9162362c4d4a1f010fcd7f51e
 /usr/share/package-licenses/pypi-numpy/64796c34e3592909154742074f735b89171a4418
 /usr/share/package-licenses/pypi-numpy/7363889d9c7364f41a37d3efa2ec375bc836d916
 /usr/share/package-licenses/pypi-numpy/752f3cb872e3c7a6e096746e3648acaf2e065c96
@@ -265,9 +269,11 @@ popd
 /usr/share/package-licenses/pypi-numpy/860ce1e3089e4750ef43d9973281f1062f93636b
 /usr/share/package-licenses/pypi-numpy/8ef530850989072e75f6f743a03e377de4392a68
 /usr/share/package-licenses/pypi-numpy/b1881ea58a8dacfb4e8965ca56be6cbbe9f53be1
+/usr/share/package-licenses/pypi-numpy/b4d2f13f23b03cab5829a7afc8d71ceb1d2700a5
 /usr/share/package-licenses/pypi-numpy/c107ade2df71a8954740468bbaa8b15e0ef4cb8b
 /usr/share/package-licenses/pypi-numpy/c474367bace9239be97704a6272681c4c22ed9f6
 /usr/share/package-licenses/pypi-numpy/df1c41ca8a294222a81f70a142832d6566fbd889
+/usr/share/package-licenses/pypi-numpy/ea1263113ef589c02b6f622ffb73162bdbafaf09
 /usr/share/package-licenses/pypi-numpy/ed59b8ab4e260b632c935598bf0d1472e4e2dbdf
 
 %files python
